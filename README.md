@@ -1,27 +1,26 @@
-## Workflow
+## Doc Frame
 
-> A project template based on TypeScript, React, immer, emotion, rex, ruled-router...
+> Common UI for docs page.
 
 ### Usage
 
-Dev:
+```tsx
+import { DocSidebar, ISidebarEntry } from "@jimengio/doc-frame";
 
-```bash
-yarn dll
-yarn dev
-```
+let docItems: ISidebarEntry[] = [
+  {
+    title: "Demo 1",
+    cnTitle: "例1",
+    path: "demo1",
+  },
+  {
+    title: "Demo 2",
+    cnTitle: "例2",
+    path: "demo2",
+  },
+];
 
-Compile library:
-
-```bash
-yarn compile
-```
-
-Release:
-
-```bash
-yarn release
-# yarn serve
+<DocSidebar items={docItems} currentPath={path} onSwitch={(item) => setPath(item.path)} />;
 ```
 
 ### Workflow

@@ -8,7 +8,6 @@ export default class Home extends React.Component {
     return (
       <div>
         Home Page
-        <HashLink to={genRouter.content.name} text={"Open content"} className={styleButton} />
         <a
           onClick={async () => {
             let { showTime } = await import("../util/time" /* webpackChunkName:"time" */);

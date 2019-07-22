@@ -1,3 +1,1 @@
-export function demo() {
-  console.log("demo");
-}
+export { default as DocSidebar, ISidebarEntry } from "./sidebar";

@@ -19,17 +19,23 @@ export let genRouter = {
     path: () => `/home`,
     go: () => switchPath(`/home`),
   },
-  content: {
-    name: "content",
-    raw: "content",
-    path: () => `/content`,
-    go: () => switchPath(`/content`),
+  demo1: {
+    name: "demo1",
+    raw: "demo1",
+    path: () => `/demo1`,
+    go: () => switchPath(`/demo1`),
   },
-  else: {
-    name: "else",
-    raw: "else",
-    path: () => `/else`,
-    go: () => switchPath(`/else`),
+  demo2: {
+    name: "demo2",
+    raw: "demo2",
+    path: () => `/demo2`,
+    go: () => switchPath(`/demo2`),
+  },
+  demo3: {
+    name: "demo3",
+    raw: "demo3",
+    path: () => `/demo3`,
+    go: () => switchPath(`/demo3`),
   },
   _: {
     name: "home",

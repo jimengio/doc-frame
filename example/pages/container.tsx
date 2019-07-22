@@ -1,33 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import { parseRoutePath, IRouteParseResult } from "@jimengio/ruled-router";
-import { css } from "emotion";
+import { css, cx } from "emotion";
 
 import Home from "./home";
-import Content from "./content";
 import { HashRedirect } from "@jimengio/ruled-router/lib/dom";
 import { genRouter } from "controller/generated-router";
+import { row, fullscreen } from "@jimengio/shared-utils";
+import DocSidebar, { ISidebarEntry } from "../../src/sidebar";
 
-const renderChildPage = (routerTree: IRouteParseResult) => {
-  if (routerTree != null) {
-    switch (routerTree.name) {
-      case genRouter.home.name:
-        return <Home />;
-      case genRouter.content.name:
-        return <Content />;
-      default:
-        return (
-          <HashRedirect to={genRouter.home.name} delay={2}>
-            2s to redirect
-          </HashRedirect>
-        );
-    }
-  }
-  return <div>NOTHING</div>;
-};
+let docItems: ISidebarEntry[] = [
+  {
+    title: "Demo 1",
+    cnTitle: "例1",
+    path: "demo1",
+  },
+  {
+    title: "Demo 2",
+    cnTitle: "例2",
+    path: "demo2",
+  },
+];
 
 export default (props) => {
+  let [path, setPath] = useState(null as string);
+
+  /** Methods */
+
+  /** Effects */
+
+  /** Renderers */
+
+  let renderChildPage = (routerTree: IRouteParseResult) => {
+    if (routerTree != null) {
+      switch (routerTree.name) {
+        case genRouter.home.name:
+          return <Home />;
+        default:
+          return (
+            <HashRedirect to={genRouter.home.name} delay={2}>
+              2s to redirect
+            </HashRedirect>
+          );
+      }
+    }
+    return <div>NOTHING</div>;
+  };
+
   return (
-    <div className={styleContainer}>
+    <div className={cx(fullscreen, row, styleContainer)}>
+      <DocSidebar items={docItems} currentPath={path} onSwitch={(item) => setPath(item.path)} />
       <div className={styleTitle}>Container</div>
       {renderChildPage(props.router)}
     </div>
