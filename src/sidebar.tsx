@@ -31,7 +31,9 @@ let DocSidebar: FC<{
   /** Renderers */
   return (
     <div className={cx(column, fullHeight, styleContainer, props.className)}>
-      <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search..." className={styleSearch} />
+      <div className={styleSearchContainer}>
+        <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search..." className={styleSearch} />
+      </div>
       <div className={expand}>
         {props.items
           .filter((item) => {
@@ -68,17 +70,18 @@ let styleSearch = css`
   line-height: 32px;
   font-size: 14px;
   border: none;
-  padding: 0 8px;
-  border-bottom: 1px solid hsl(0, 0%, 90%);
+  padding: 0 16px;
+  width: 100%;
 
-  &:hover {
+  &:active,
+  &:focus {
     outline: none;
   }
 `;
 
 let styleItem = css`
-  padding: 4px 8px;
-  line-height: 24px;
+  padding: 8px 16px;
+  line-height: 28px;
   border-bottom: 1px solid hsl(0, 0%, 90%);
   cursor: pointer;
 
@@ -103,4 +106,9 @@ let styleSelected = css`
   &:hover {
     background-color: hsl(200, 90%, 64%);
   }
+`;
+
+let styleSearchContainer = css`
+  padding: 8px 0;
+  border-bottom: 1px solid hsl(0, 0%, 90%);
 `;
