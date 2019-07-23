@@ -4,6 +4,12 @@
 
 ### Usage
 
+![](https://img.shields.io/npm/v/@jimengio/doc-frame.svg?style=flat-square)
+
+```bash
+yarn add --dev @jimengio/doc-frame
+```
+
 ```tsx
 import { DocSidebar, ISidebarEntry } from "@jimengio/doc-frame";
 
