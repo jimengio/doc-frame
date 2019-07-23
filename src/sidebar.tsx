@@ -26,33 +26,50 @@ let DocSidebar: FC<{
 }> = (props) => {
   let [query, setQuery] = useState("");
 
+  let visibleItems = props.items.filter((item) => {
+    return found(item.title, query) || found(item.path, query) || found(item.cnTitle, query);
+  });
+
   /** Methods */
+
+  let onKeydown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.keyCode === 13) {
+      let selectedItem = visibleItems[0];
+      if (selectedItem != null) {
+        props.onSwitch(selectedItem);
+      }
+    }
+  };
+
   /** Effects */
   /** Renderers */
+
   return (
     <div className={cx(column, fullHeight, styleContainer, props.className)}>
       <div className={styleSearchContainer}>
-        <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search..." className={styleSearch} />
+        <input
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="Search..."
+          className={styleSearch}
+          onKeyDown={(event) => onKeydown(event)}
+        />
       </div>
       <div className={expand}>
-        {props.items
-          .filter((item) => {
-            return found(item.title, query) || found(item.path, query) || found(item.cnTitle, query);
-          })
-          .map((item) => {
-            return (
-              <div
-                key={item.path}
-                className={cx(styleItem, props.currentPath === item.path ? styleSelected : null)}
-                onClick={() => {
-                  props.onSwitch(item);
-                }}
-              >
-                <div>{item.title}</div>
-                <div className={styleSubTitle}>{item.cnTitle}</div>
-              </div>
-            );
-          })}
+        {visibleItems.map((item) => {
+          return (
+            <div
+              key={item.path}
+              className={cx(styleItem, props.currentPath === item.path ? styleSelected : null)}
+              onClick={() => {
+                props.onSwitch(item);
+              }}
+            >
+              <div>{item.title}</div>
+              <div className={styleSubTitle}>{item.cnTitle}</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
