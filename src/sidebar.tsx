@@ -57,16 +57,17 @@ let DocSidebar: FC<{
       </div>
       <div className={expand}>
         {visibleItems.map((item) => {
+          let isSelected = props.currentPath === item.path;
           return (
             <div
               key={item.path}
-              className={cx(styleItem, props.currentPath === item.path ? styleSelected : null)}
+              className={cx(styleItem, isSelected ? styleSelected : null)}
               onClick={() => {
                 props.onSwitch(item);
               }}
             >
               <div>{item.title}</div>
-              <div className={styleSubTitle}>{item.cnTitle}</div>
+              <div className={cx(styleSubTitle, isSelected ? styleSubTitleSelected : null)}>{item.cnTitle}</div>
             </div>
           );
         })}
@@ -112,13 +113,13 @@ let styleSubTitle = css`
   font-size: 13px;
 `;
 
+let styleSubTitleSelected = css`
+  color: white;
+`;
+
 let styleSelected = css`
   background-color: hsl(200, 90%, 60%);
   color: white;
-
-  .${styleSubTitle} {
-    color: white;
-  }
 
   &:hover {
     background-color: hsl(200, 90%, 64%);
