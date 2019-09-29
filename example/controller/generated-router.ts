@@ -25,6 +25,18 @@ export let genRouter = {
     path: () => `/doc-block`,
     go: () => switchPath(`/doc-block`),
   },
+  docBlockSimple: {
+    name: "doc-block-simple",
+    raw: "doc-block-simple",
+    path: () => `/doc-block-simple`,
+    go: () => switchPath(`/doc-block-simple`),
+  },
+  docDemo: {
+    name: "doc-demo",
+    raw: "doc-demo",
+    path: () => `/doc-demo`,
+    go: () => switchPath(`/doc-demo`),
+  },
   _: {
     name: "home",
     raw: "",

@@ -5,24 +5,10 @@ import { HashLink } from "@jimengio/ruled-router/lib/dom";
 
 export default class Home extends React.Component {
   render() {
-    return (
-      <div>
-        Home Page
-        <a
-          onClick={async () => {
-            let { showTime } = await import("../util/time" /* webpackChunkName:"time" */);
-            showTime();
-          }}
-        >
-          Use
-        </a>
-      </div>
-    );
+    return <div className={styleContainer}>Default page, no content.</div>;
   }
 }
 
-const styleButton = css`
-  margin: 8px;
-  cursor: pointer;
-  color: blue;
+let styleContainer = css`
+  padding: 16px;
 `;

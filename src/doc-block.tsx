@@ -1,5 +1,5 @@
 import React, { FC, CSSProperties } from "react";
-import { css } from "emotion";
+import { css, cx } from "emotion";
 import hljs from "highlight.js";
 import { Remarkable } from "remarkable";
 import "highlight.js/styles/github.css";
@@ -23,7 +23,21 @@ let DocBlock: FC<{
   let html = md.render(content);
 
   /** Renderers */
-  return <div className={props.className} style={props.style} dangerouslySetInnerHTML={{ __html: html }}></div>;
+  return <div className={cx(styleDoc, props.className)} style={props.style} dangerouslySetInnerHTML={{ __html: html }}></div>;
 });
 
 export default DocBlock;
+
+let styleDoc = css`
+  padding: 16px;
+  margin: 8px;
+  border: 1px solid hsl(0, 0%, 95%);
+  max-width: 720px;
+
+  pre {
+    padding: 8px;
+    background-color: hsl(0, 0%, 97%);
+    border: 1px solid hsl(0, 0%, 95%);
+    border-radius: 4px;
+  }
+`;

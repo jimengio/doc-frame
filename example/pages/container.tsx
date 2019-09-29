@@ -8,22 +8,26 @@ import { genRouter } from "controller/generated-router";
 import { row, fullscreen, expand } from "@jimengio/shared-utils";
 import DocSidebar, { ISidebarEntry } from "../../src/doc-sidebar";
 import DemoDocBlock from "./demo-doc-block";
+import DemoDocDemo from "./demo-doc-demo";
 
 let docItems: ISidebarEntry[] = [
   {
     title: "Doc block",
     cnTitle: "文档",
-    path: "doc-block",
+    path: genRouter.docBlock.name,
   },
   {
     title: "Doc Block(Simple)",
-    path: "doc-block-simple",
+    path: genRouter.docBlockSimple.name,
+  },
+  {
+    title: "Doc Demo",
+    cnTitle: "示例",
+    path: genRouter.docDemo.name,
   },
 ];
 
 export default (props) => {
-  let [path, setPath] = useState(null as string);
-
   /** Methods */
 
   /** Effects */
@@ -34,7 +38,10 @@ export default (props) => {
     if (routerTree != null) {
       switch (routerTree.name) {
         case genRouter.docBlock.name:
+        case genRouter.docBlockSimple.name:
           return <DemoDocBlock />;
+        case genRouter.docDemo.name:
+          return <DemoDocDemo />;
         default:
           return <Home />;
       }
@@ -47,7 +54,7 @@ export default (props) => {
       <DocSidebar
         title={"Doc Frame"}
         items={docItems}
-        currentPath={path}
+        currentPath={props.router.name}
         onSwitch={(item) => {
           window.location.replace(`#/${item.path}`);
         }}

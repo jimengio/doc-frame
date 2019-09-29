@@ -60,6 +60,7 @@ let DocSidebar: FC<{
       <div className={expand}>
         {visibleItems.map((item) => {
           let isSelected = props.currentPath === item.path;
+
           return (
             <div
               key={item.path}
@@ -132,6 +133,6 @@ let styleSearchContainer = css`
 
 let styleTitle = css`
   font-size: 30px;
-  padding: 64px 16px;
+  padding: 32px 16px 48px;
   font-weight: 100;
 `;
