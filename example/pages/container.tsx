@@ -48,7 +48,7 @@ export default (props) => {
 
   return (
     <div className={cx(fullscreen, row, styleContainer)}>
-      <DocSidebar items={docItems} currentPath={path} onSwitch={(item) => setPath(item.path)} />
+      <DocSidebar title={"Doc Frame"} items={docItems} currentPath={path} onSwitch={(item) => setPath(item.path)} />
       <div className={styleTitle}>Container</div>
       {renderChildPage(props.router)}
     </div>

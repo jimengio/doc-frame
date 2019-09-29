@@ -23,6 +23,7 @@ let DocSidebar: FC<{
   onSwitch: (item: ISidebarEntry) => void;
   className?: string;
   items: ISidebarEntry[];
+  title?: string;
 }> = (props) => {
   let [query, setQuery] = useState("");
 
@@ -46,6 +47,7 @@ let DocSidebar: FC<{
 
   return (
     <div className={cx(column, fullHeight, styleContainer, props.className)}>
+      <div className={styleTitle}>{props.title || "Docs"}</div>
       <div className={styleSearchContainer}>
         <input
           value={query}
@@ -67,7 +69,7 @@ let DocSidebar: FC<{
               }}
             >
               <div>{item.title}</div>
-              <div className={cx(styleSubTitle, isSelected ? styleSubTitleSelected : null)}>{item.cnTitle}</div>
+              <div className={cx(styleSubTitle)}>{item.cnTitle}</div>
             </div>
           );
         })}
@@ -79,9 +81,9 @@ let DocSidebar: FC<{
 export default DocSidebar;
 
 let styleContainer = css`
-  border-right: 1px solid hsl(0, 0%, 92%);
+  /* border-right: 1px solid hsl(0, 0%, 98%); */
 
-  min-width: 240px;
+  min-width: 320px;
 `;
 
 let styleSearch = css`
@@ -99,34 +101,37 @@ let styleSearch = css`
 
 let styleItem = css`
   padding: 8px 16px;
-  line-height: 28px;
-  border-bottom: 1px solid hsl(0, 0%, 90%);
+  line-height: 20px;
+  border-bottom: 1px solid hsl(0, 0%, 97%);
   cursor: pointer;
+  color: #ccc;
 
   &:hover {
-    background-color: hsl(0, 0%, 94%);
+    background-color: hsl(0, 0%, 98%);
+    color: #333;
   }
 `;
 
 let styleSubTitle = css`
-  color: hsl(0, 0%, 70%);
   font-size: 13px;
-`;
-
-let styleSubTitleSelected = css`
-  color: white;
+  line-height: 15px;
 `;
 
 let styleSelected = css`
-  background-color: hsl(200, 90%, 60%);
-  color: white;
+  color: #333;
 
   &:hover {
-    background-color: hsl(200, 90%, 64%);
+    color: #333;
   }
 `;
 
 let styleSearchContainer = css`
   padding: 8px 0;
-  border-bottom: 1px solid hsl(0, 0%, 90%);
+  border-bottom: 1px solid hsl(0, 0%, 95%);
+`;
+
+let styleTitle = css`
+  font-size: 30px;
+  padding: 64px 16px;
+  font-weight: 100;
 `;
