@@ -14,6 +14,7 @@ let DocBlock: FC<{
   content?: string;
   className?: string;
   style?: CSSProperties;
+  embed?: boolean;
 }> = React.memo((props) => {
   let content = props.content || (props.children as string) || "TODO docs...";
 
@@ -23,7 +24,7 @@ let DocBlock: FC<{
   let html = md.render(content);
 
   /** Renderers */
-  return <div className={cx(styleDoc, props.className)} style={props.style} dangerouslySetInnerHTML={{ __html: html }}></div>;
+  return <div className={cx(styleDoc, props.embed ? styleEmbed : null, props.className)} style={props.style} dangerouslySetInnerHTML={{ __html: html }}></div>;
 });
 
 export default DocBlock;
@@ -39,5 +40,15 @@ let styleDoc = css`
     background-color: hsl(0, 0%, 97%);
     border: 1px solid hsl(0, 0%, 95%);
     border-radius: 4px;
+  }
+`;
+
+let styleEmbed = css`
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  pre {
+    padding: 0;
   }
 `;
