@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { css, cx } from "emotion";
-import { expand, column, fullHeight } from "@jimengio/shared-utils";
+import { expand, column, fullHeight, center } from "@jimengio/shared-utils";
 
 export interface ISidebarEntry {
   title: string;
@@ -23,6 +23,8 @@ let DocSidebar: FC<{
   onSwitch: (item: ISidebarEntry) => void;
   className?: string;
   items: ISidebarEntry[];
+  title?: string;
+  emptyLocale?: string;
 }> = (props) => {
   let [query, setQuery] = useState("");
 
@@ -46,6 +48,7 @@ let DocSidebar: FC<{
 
   return (
     <div className={cx(column, fullHeight, styleContainer, props.className)}>
+      <div className={styleTitle}>{props.title || "Docs"}</div>
       <div className={styleSearchContainer}>
         <input
           value={query}
@@ -56,8 +59,10 @@ let DocSidebar: FC<{
         />
       </div>
       <div className={expand}>
+        {visibleItems.length === 0 ? <div className={cx(center, styleEmpty)}>{props.emptyLocale || "No results"}</div> : null}
         {visibleItems.map((item) => {
           let isSelected = props.currentPath === item.path;
+
           return (
             <div
               key={item.path}
@@ -67,7 +72,7 @@ let DocSidebar: FC<{
               }}
             >
               <div>{item.title}</div>
-              <div className={cx(styleSubTitle, isSelected ? styleSubTitleSelected : null)}>{item.cnTitle}</div>
+              <div className={cx(styleSubTitle)}>{item.cnTitle}</div>
             </div>
           );
         })}
@@ -79,16 +84,16 @@ let DocSidebar: FC<{
 export default DocSidebar;
 
 let styleContainer = css`
-  border-right: 1px solid hsl(0, 0%, 92%);
+  /* border-right: 1px solid hsl(0, 0%, 98%); */
 
-  min-width: 240px;
+  min-width: 360px;
 `;
 
 let styleSearch = css`
   line-height: 32px;
   font-size: 14px;
   border: none;
-  padding: 0 16px;
+  padding: 0 24px;
   width: 100%;
 
   &:active,
@@ -98,35 +103,44 @@ let styleSearch = css`
 `;
 
 let styleItem = css`
-  padding: 8px 16px;
-  line-height: 28px;
-  border-bottom: 1px solid hsl(0, 0%, 90%);
+  padding: 12px 24px;
+  line-height: 20px;
+  border-bottom: 1px solid hsl(0, 0%, 98%);
   cursor: pointer;
+  color: #aaa;
 
   &:hover {
-    background-color: hsl(0, 0%, 94%);
+    background-color: hsl(0, 0%, 98%);
+    color: #111;
   }
 `;
 
 let styleSubTitle = css`
-  color: hsl(0, 0%, 70%);
   font-size: 13px;
-`;
-
-let styleSubTitleSelected = css`
-  color: white;
+  line-height: 15px;
 `;
 
 let styleSelected = css`
-  background-color: hsl(200, 90%, 60%);
-  color: white;
+  color: #111;
 
   &:hover {
-    background-color: hsl(200, 90%, 64%);
+    color: #111;
   }
 `;
 
 let styleSearchContainer = css`
   padding: 8px 0;
-  border-bottom: 1px solid hsl(0, 0%, 90%);
+  border-bottom: 1px solid hsl(0, 0%, 95%);
+`;
+
+let styleTitle = css`
+  font-size: 30px;
+  padding: 32px 24px 48px;
+  font-weight: 100;
+`;
+
+let styleEmpty = css`
+  padding: 16px;
+  font-size: 14px;
+  color: #aaa;
 `;

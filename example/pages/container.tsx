@@ -1,29 +1,36 @@
-import React, { useState } from "react";
+import React, { FC } from "react";
+
 import { parseRoutePath, IRouteParseResult } from "@jimengio/ruled-router";
 import { css, cx } from "emotion";
 
 import Home from "./home";
 import { HashRedirect } from "@jimengio/ruled-router/lib/dom";
 import { genRouter } from "controller/generated-router";
-import { row, fullscreen } from "@jimengio/shared-utils";
-import DocSidebar, { ISidebarEntry } from "../../src/sidebar";
+import { row, fullscreen, expand } from "@jimengio/shared-utils";
+import DocSidebar, { ISidebarEntry } from "../../src/doc-sidebar";
+import DemoDocBlock from "./demo-doc-block";
+import DemoDocDemo from "./demo-doc-demo";
 
 let docItems: ISidebarEntry[] = [
   {
-    title: "Demo 1",
-    cnTitle: "例1",
-    path: "demo1",
+    title: "Doc block",
+    cnTitle: "文档",
+    path: genRouter.docBlock.name,
   },
   {
-    title: "Demo 2",
-    cnTitle: "例2",
-    path: "demo2",
+    title: "Doc Block(Simple)",
+    path: genRouter.docBlockSimple.name,
+  },
+  {
+    title: "Doc Demo",
+    cnTitle: "示例",
+    path: genRouter.docDemo.name,
   },
 ];
 
-export default (props) => {
-  let [path, setPath] = useState(null as string);
-
+let Container: FC<{
+  router: IRouteParseResult;
+}> = React.memo((props) => {
   /** Methods */
 
   /** Effects */
@@ -33,14 +40,13 @@ export default (props) => {
   let renderChildPage = (routerTree: IRouteParseResult) => {
     if (routerTree != null) {
       switch (routerTree.name) {
-        case genRouter.home.name:
-          return <Home />;
+        case genRouter.docBlock.name:
+        case genRouter.docBlockSimple.name:
+          return <DemoDocBlock />;
+        case genRouter.docDemo.name:
+          return <DemoDocDemo />;
         default:
-          return (
-            <HashRedirect to={genRouter.home.name} delay={2}>
-              2s to redirect
-            </HashRedirect>
-          );
+          return <Home />;
       }
     }
     return <div>NOTHING</div>;
@@ -48,17 +54,23 @@ export default (props) => {
 
   return (
     <div className={cx(fullscreen, row, styleContainer)}>
-      <DocSidebar items={docItems} currentPath={path} onSwitch={(item) => setPath(item.path)} />
-      <div className={styleTitle}>Container</div>
-      {renderChildPage(props.router)}
+      <DocSidebar
+        title={"Doc Frame"}
+        items={docItems}
+        currentPath={props.router.name}
+        onSwitch={(item) => {
+          window.location.replace(`#/${item.path}`);
+        }}
+      />
+      <div className={cx(expand, stylePage)}>{renderChildPage(props.router)}</div>
     </div>
   );
-};
+});
 
-const styleContainer = css`
-  font-family: "Helvetica";
-`;
+export default Container;
 
-const styleTitle = css`
-  margin-bottom: 16px;
+const styleContainer = css``;
+
+let stylePage = css`
+  padding: 40px;
 `;
