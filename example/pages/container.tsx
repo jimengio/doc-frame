@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { FC } from "react";
+
 import { parseRoutePath, IRouteParseResult } from "@jimengio/ruled-router";
 import { css, cx } from "emotion";
 
@@ -27,7 +28,9 @@ let docItems: ISidebarEntry[] = [
   },
 ];
 
-export default (props) => {
+let Container: FC<{
+  router: IRouteParseResult;
+}> = React.memo((props) => {
   /** Methods */
 
   /** Effects */
@@ -59,15 +62,15 @@ export default (props) => {
           window.location.replace(`#/${item.path}`);
         }}
       />
-      <div className={expand}>{renderChildPage(props.router)}</div>
+      <div className={cx(expand, stylePage)}>{renderChildPage(props.router)}</div>
     </div>
   );
-};
+});
 
-const styleContainer = css`
-  font-family: "Helvetica";
-`;
+export default Container;
 
-const styleTitle = css`
-  margin-bottom: 16px;
+const styleContainer = css``;
+
+let stylePage = css`
+  padding: 40px;
 `;

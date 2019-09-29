@@ -33,7 +33,7 @@ let DocDemo: FC<{
 export default DocDemo;
 
 let styleContainer = css`
-  margin: 8px;
+  margin: 24px 16px;
   max-width: 720px;
   border-radius: 4px;
 
@@ -42,6 +42,7 @@ let styleContainer = css`
 
 let styleDemoArea = css`
   min-height: 160px;
+  min-width: 360px;
   padding: 16px;
 `;
 

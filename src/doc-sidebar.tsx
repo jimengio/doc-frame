@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { css, cx } from "emotion";
-import { expand, column, fullHeight } from "@jimengio/shared-utils";
+import { expand, column, fullHeight, center } from "@jimengio/shared-utils";
 
 export interface ISidebarEntry {
   title: string;
@@ -24,6 +24,7 @@ let DocSidebar: FC<{
   className?: string;
   items: ISidebarEntry[];
   title?: string;
+  emptyLocale?: string;
 }> = (props) => {
   let [query, setQuery] = useState("");
 
@@ -58,6 +59,7 @@ let DocSidebar: FC<{
         />
       </div>
       <div className={expand}>
+        {visibleItems.length === 0 ? <div className={cx(center, styleEmpty)}>{props.emptyLocale || "No results"}</div> : null}
         {visibleItems.map((item) => {
           let isSelected = props.currentPath === item.path;
 
@@ -84,14 +86,14 @@ export default DocSidebar;
 let styleContainer = css`
   /* border-right: 1px solid hsl(0, 0%, 98%); */
 
-  min-width: 320px;
+  min-width: 360px;
 `;
 
 let styleSearch = css`
   line-height: 32px;
   font-size: 14px;
   border: none;
-  padding: 0 16px;
+  padding: 0 24px;
   width: 100%;
 
   &:active,
@@ -101,9 +103,9 @@ let styleSearch = css`
 `;
 
 let styleItem = css`
-  padding: 8px 16px;
+  padding: 12px 24px;
   line-height: 20px;
-  border-bottom: 1px solid hsl(0, 0%, 97%);
+  border-bottom: 1px solid hsl(0, 0%, 98%);
   cursor: pointer;
   color: #aaa;
 
@@ -133,6 +135,12 @@ let styleSearchContainer = css`
 
 let styleTitle = css`
   font-size: 30px;
-  padding: 32px 16px 48px;
+  padding: 32px 24px 48px;
   font-weight: 100;
+`;
+
+let styleEmpty = css`
+  padding: 16px;
+  font-size: 14px;
+  color: #aaa;
 `;
