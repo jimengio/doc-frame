@@ -19,23 +19,11 @@ export let genRouter = {
     path: () => `/home`,
     go: () => switchPath(`/home`),
   },
-  demo1: {
-    name: "demo1",
-    raw: "demo1",
-    path: () => `/demo1`,
-    go: () => switchPath(`/demo1`),
-  },
-  demo2: {
-    name: "demo2",
-    raw: "demo2",
-    path: () => `/demo2`,
-    go: () => switchPath(`/demo2`),
-  },
-  demo3: {
-    name: "demo3",
-    raw: "demo3",
-    path: () => `/demo3`,
-    go: () => switchPath(`/demo3`),
+  docBlock: {
+    name: "doc-block",
+    raw: "doc-block",
+    path: () => `/doc-block`,
+    go: () => switchPath(`/doc-block`),
   },
   _: {
     name: "home",

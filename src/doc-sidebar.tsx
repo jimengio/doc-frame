@@ -104,11 +104,11 @@ let styleItem = css`
   line-height: 20px;
   border-bottom: 1px solid hsl(0, 0%, 97%);
   cursor: pointer;
-  color: #ccc;
+  color: #aaa;
 
   &:hover {
     background-color: hsl(0, 0%, 98%);
-    color: #333;
+    color: #111;
   }
 `;
 
@@ -118,10 +118,10 @@ let styleSubTitle = css`
 `;
 
 let styleSelected = css`
-  color: #333;
+  color: #111;
 
   &:hover {
-    color: #333;
+    color: #111;
   }
 `;
 

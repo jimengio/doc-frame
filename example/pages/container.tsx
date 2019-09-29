@@ -5,19 +5,19 @@ import { css, cx } from "emotion";
 import Home from "./home";
 import { HashRedirect } from "@jimengio/ruled-router/lib/dom";
 import { genRouter } from "controller/generated-router";
-import { row, fullscreen } from "@jimengio/shared-utils";
-import DocSidebar, { ISidebarEntry } from "../../src/sidebar";
+import { row, fullscreen, expand } from "@jimengio/shared-utils";
+import DocSidebar, { ISidebarEntry } from "../../src/doc-sidebar";
+import DemoDocBlock from "./demo-doc-block";
 
 let docItems: ISidebarEntry[] = [
   {
-    title: "Demo 1",
-    cnTitle: "例1",
-    path: "demo1",
+    title: "Doc block",
+    cnTitle: "文档",
+    path: "doc-block",
   },
   {
-    title: "Demo 2",
-    cnTitle: "例2",
-    path: "demo2",
+    title: "Doc Block(Simple)",
+    path: "doc-block-simple",
   },
 ];
 
@@ -33,14 +33,10 @@ export default (props) => {
   let renderChildPage = (routerTree: IRouteParseResult) => {
     if (routerTree != null) {
       switch (routerTree.name) {
-        case genRouter.home.name:
-          return <Home />;
+        case genRouter.docBlock.name:
+          return <DemoDocBlock />;
         default:
-          return (
-            <HashRedirect to={genRouter.home.name} delay={2}>
-              2s to redirect
-            </HashRedirect>
-          );
+          return <Home />;
       }
     }
     return <div>NOTHING</div>;
@@ -48,9 +44,15 @@ export default (props) => {
 
   return (
     <div className={cx(fullscreen, row, styleContainer)}>
-      <DocSidebar title={"Doc Frame"} items={docItems} currentPath={path} onSwitch={(item) => setPath(item.path)} />
-      <div className={styleTitle}>Container</div>
-      {renderChildPage(props.router)}
+      <DocSidebar
+        title={"Doc Frame"}
+        items={docItems}
+        currentPath={path}
+        onSwitch={(item) => {
+          window.location.replace(`#/${item.path}`);
+        }}
+      />
+      <div className={expand}>{renderChildPage(props.router)}</div>
     </div>
   );
 };
