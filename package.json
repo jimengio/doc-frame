@@ -1,6 +1,6 @@
 {
   "name": "@jimengio/doc-frame",
-  "version": "0.1.2-a4",
+  "version": "0.1.2",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
