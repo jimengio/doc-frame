@@ -101,10 +101,10 @@
   resolved "https://registry.npmjs.org/@jimengio/router-code-generator/-/router-code-generator-0.2.4.tgz#b609e08d11bf10a3c034bf3218f7e697f1242534"
   integrity sha512-6CEDbDdVA7D25CG0yJD7sjO5MUyNrR8CUjTIKWgFuL4SUm+eNHwLvxZX6MRzTUMKqgnw74LKje15rsTSZxWp4Q==
 
-"@jimengio/ruled-router@^0.2.16":
-  version "0.2.16"
-  resolved "https://registry.npmjs.org/@jimengio/ruled-router/-/ruled-router-0.2.16.tgz#a8e224e027bf5dbf359c61f57cd04cebae79b08f"
-  integrity sha512-3Xb/G6PSTnD2ECVyxWiIfEf8ecupF1ZE/uoEk+ab80LP3pjplzS/z+Yod+RY4oTdnCv+pENAMmsiIFBKTZ/wEg==
+"@jimengio/ruled-router@^0.2.17":
+  version "0.2.17"
+  resolved "https://registry.npmjs.org/@jimengio/ruled-router/-/ruled-router-0.2.17.tgz#f5f4ce8e8376842171618a93c6a122adb49a7203"
+  integrity sha512-KNVWIQrp5tMqBGeOIKJfLq2J1q4iwy9TkCvwA7wL/MwWExARtqul7NY8YrbSHzVsattqy0TKnXQde5ZG7/58Pw==
   dependencies:
     query-string "^6.8.1"
 
