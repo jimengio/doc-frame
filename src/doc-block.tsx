@@ -49,6 +49,6 @@ let styleEmbed = css`
   margin: 0;
 
   pre {
-    padding: 0;
+    margin: 0;
   }
 `;

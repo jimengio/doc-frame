@@ -1,6 +1,6 @@
 import React, { FC, CSSProperties } from "react";
 import { css, cx } from "emotion";
-import { rowMiddle } from "@jimengio/shared-utils";
+import { rowMiddle, rowParted } from "@jimengio/shared-utils";
 
 let DocDemo: FC<{
   title: string;
@@ -17,8 +17,7 @@ let DocDemo: FC<{
   /** Renderers */
   return (
     <div className={cx(styleContainer, props.className)} style={props.style}>
-      <div className={styleDemoArea}>{props.children}</div>
-      <div className={styleFooter}>
+      <div className={cx(rowParted, styleHeader)}>
         <span className={styleTitle}>{props.title}</span>
         {props.title ? (
           <a className={styleLink} href={props.link} target="_blank">
@@ -26,6 +25,7 @@ let DocDemo: FC<{
           </a>
         ) : null}
       </div>
+      <div className={styleDemoArea}>{props.children}</div>
     </div>
   );
 });
@@ -46,9 +46,13 @@ let styleDemoArea = css`
   padding: 16px;
 `;
 
-let styleFooter = css`
-  padding: 8px 8px;
-  border-top: 1px solid hsl(0, 0%, 90%);
+let styleHeader = css`
+  padding: 12px 12px;
+  font-size: 18px;
+  font-weight: 300;
+  font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
+  background-color: hsl(0, 0%, 96%);
+  border-bottom: 1px solid hsl(0, 0%, 90%);
 `;
 
 let styleTitle = css`

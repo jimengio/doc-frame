@@ -17,10 +17,10 @@ let docItems: ISidebarEntry[] = [
     cnTitle: "文档",
     path: genRouter.docBlock.name,
   },
-  {
-    title: "Doc Block(Simple)",
-    path: genRouter.docBlockSimple.name,
-  },
+  // {
+  //   title: "Doc Block(Simple)",
+  //   path: genRouter.docBlockSimple.name,
+  // },
   {
     title: "Doc Demo",
     cnTitle: "示例",
