@@ -19,7 +19,9 @@ let DocSnippet: FC<{ code: string; lang?: string; className?: string; snippetCla
   return (
     <div className={props.className}>
       <pre className={cx(styleSnippet, props.snippetClassName)}>
-        <code dangerouslySetInnerHTML={{ __html: html }}>{}</code>
+        <code className={styleCode} dangerouslySetInnerHTML={{ __html: html }}>
+          {}
+        </code>
       </pre>
     </div>
   );
@@ -36,7 +38,9 @@ let styleSnippet = css`
   padding: 16px;
 
   min-width: 400px;
+`;
 
+let styleCode = css`
   font-family: Source Code Pro, menlo, "Courier New", Courier, monospace;
   font-size: 13px;
   line-height: 20px;
