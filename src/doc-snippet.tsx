@@ -28,12 +28,16 @@ let DocSnippet: FC<{ code: string; lang?: string; className?: string; snippetCla
 export default DocSnippet;
 
 let styleSnippet = css`
-  margin: 8px;
+  margin: 16px 0;
   display: inline-block;
-  border: 1px solid hsl(0, 0%, 92%);
-  background-color: hsl(0, 0%, 97%);
+  border: 1px solid hsl(0, 0%, 94%);
+  background-color: hsl(0, 0%, 98%);
   border-radius: 2px;
   padding: 16px;
 
-  min-width: 320px;
+  min-width: 400px;
+
+  font-family: Source Code Pro, menlo, "Courier New", Courier, monospace;
+  font-size: 13px;
+  line-height: 20px;
 `;
