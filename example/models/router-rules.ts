@@ -8,5 +8,6 @@ export const routerRules: IRouteRule[] = [
   },
 
   { path: "doc-demo" },
+  { path: "doc-snippet" },
   { path: "", name: "home" },
 ];

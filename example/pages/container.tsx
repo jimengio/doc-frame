@@ -5,11 +5,12 @@ import { css, cx } from "emotion";
 
 import Home from "./home";
 import { HashRedirect } from "@jimengio/ruled-router/lib/dom";
-import { genRouter } from "controller/generated-router";
+import { genRouter, GenRouterTypeMain } from "controller/generated-router";
 import { row, fullscreen, expand } from "@jimengio/shared-utils";
 import DocSidebar, { ISidebarEntry } from "../../src/doc-sidebar";
 import DemoDocBlock from "./demo-doc-block";
 import DemoDocDemo from "./demo-doc-demo";
+import DemoDocSnippet from "./demo-doc-snippet";
 
 let docItems: ISidebarEntry[] = [
   {
@@ -26,10 +27,15 @@ let docItems: ISidebarEntry[] = [
     cnTitle: "示例",
     path: genRouter.docDemo.name,
   },
+  {
+    title: "Doc Snippet",
+    cnTitle: "代码片段",
+    path: genRouter.docSnippet.name,
+  },
 ];
 
 let Container: FC<{
-  router: IRouteParseResult;
+  router: GenRouterTypeMain;
 }> = React.memo((props) => {
   /** Methods */
 
@@ -37,14 +43,16 @@ let Container: FC<{
 
   /** Renderers */
 
-  let renderChildPage = (routerTree: IRouteParseResult) => {
+  let renderChildPage = (routerTree: GenRouterTypeMain) => {
     if (routerTree != null) {
       switch (routerTree.name) {
-        case genRouter.docBlock.name:
-        case genRouter.docBlockSimple.name:
+        case "doc-block":
+        case "doc-block-simple":
           return <DemoDocBlock />;
-        case genRouter.docDemo.name:
+        case "doc-demo":
           return <DemoDocDemo />;
+        case "doc-snippet":
+          return <DemoDocSnippet />;
         default:
           return <Home />;
       }

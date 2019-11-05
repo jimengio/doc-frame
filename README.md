@@ -51,6 +51,12 @@ A card container with title and link:
 </DocDemo>
 ```
 
+- DocSnippet
+
+```tsx
+<DocSnippet code={code} lang={"typescript"} />
+```
+
 ### Workflow
 
 https://github.com/jimengio/ts-workflow
