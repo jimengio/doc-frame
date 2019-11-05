@@ -12,6 +12,8 @@ function qsStringify(queries: { [k: string]: string }) {
 
 // generated
 
+// Generated with router-code-generator@0.2.4
+
 export let genRouter = {
   home: {
     name: "home",
@@ -37,10 +39,63 @@ export let genRouter = {
     path: () => `/doc-demo`,
     go: () => switchPath(`/doc-demo`),
   },
-  _: {
+  docSnippet: {
+    name: "doc-snippet",
+    raw: "doc-snippet",
+    path: () => `/doc-snippet`,
+    go: () => switchPath(`/doc-snippet`),
+  },
+  $: {
     name: "home",
     raw: "",
     path: () => `/`,
     go: () => switchPath(`/`),
   },
 };
+
+export type GenRouterTypeMain =
+  | GenRouterTypeTree["home"]
+  | GenRouterTypeTree["docBlock"]
+  | GenRouterTypeTree["docBlockSimple"]
+  | GenRouterTypeTree["docDemo"]
+  | GenRouterTypeTree["docSnippet"]
+  | GenRouterTypeTree["$"];
+
+export interface GenRouterTypeTree {
+  home: {
+    name: "home";
+    params: {};
+    query: {};
+    next: null;
+  };
+  docBlock: {
+    name: "doc-block";
+    params: {};
+    query: {};
+    next: null;
+  };
+  docBlockSimple: {
+    name: "doc-block-simple";
+    params: {};
+    query: {};
+    next: null;
+  };
+  docDemo: {
+    name: "doc-demo";
+    params: {};
+    query: {};
+    next: null;
+  };
+  docSnippet: {
+    name: "doc-snippet";
+    params: {};
+    query: {};
+    next: null;
+  };
+  $: {
+    name: "home";
+    params: {};
+    query: {};
+    next: null;
+  };
+}
