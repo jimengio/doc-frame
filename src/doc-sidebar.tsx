@@ -1,6 +1,7 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect, useRef } from "react";
 import { css, cx } from "emotion";
 import { expand, column, fullHeight, center } from "@jimengio/shared-utils";
+import KEY_CODES from "./utils/key-code";
 
 export interface ISidebarEntry {
   title: string;
@@ -27,6 +28,7 @@ let DocSidebar: FC<{
   emptyLocale?: string;
 }> = (props) => {
   let [query, setQuery] = useState("");
+  let [selectedIndex, setSeletedIndex] = useState(undefined);
 
   let visibleItems = props.items.filter((item) => {
     return found(item.title, query) || found(item.path, query) || found(item.cnTitle, query);
@@ -40,10 +42,32 @@ let DocSidebar: FC<{
       if (selectedItem != null) {
         props.onSwitch(selectedItem);
       }
+    } else {
+      onSwitchItem(event);
+    }
+  };
+
+  let onSwitchItem = async (event) => {
+    let currentIndex = visibleItems.map((element) => element.path).indexOf(props.currentPath);
+    switch (event.keyCode) {
+      case KEY_CODES.DOWN:
+        if (currentIndex === visibleItems.length - 1 || currentIndex === -1) return;
+        await setSeletedIndex(++currentIndex);
+        return;
+      case KEY_CODES.UP:
+        if (currentIndex === 0 || currentIndex === -1) return;
+        await setSeletedIndex(--currentIndex);
+        return;
+      default:
+        return;
     }
   };
 
   /** Effects */
+  useEffect(() => {
+    if (!visibleItems[selectedIndex]) return;
+    props.onSwitch(visibleItems[selectedIndex]);
+  }, [selectedIndex]);
   /** Renderers */
 
   return (
@@ -60,16 +84,18 @@ let DocSidebar: FC<{
       </div>
       <div className={expand}>
         {visibleItems.length === 0 ? <div className={cx(center, styleEmpty)}>{props.emptyLocale || "No results"}</div> : null}
-        {visibleItems.map((item) => {
+        {visibleItems.map((item, index) => {
           let isSelected = props.currentPath === item.path;
 
           return (
             <div
               key={item.path}
-              className={cx(styleItem, isSelected ? styleSelected : null)}
+              className={cx(styleItem, isSelected ? cx(styleSelected, notFocus) : notFocus)}
               onClick={() => {
                 props.onSwitch(item);
               }}
+              tabIndex={0}
+              onKeyDown={onSwitchItem}
             >
               <div>{item.title}</div>
               <div className={cx(styleSubTitle)}>{item.cnTitle}</div>
@@ -125,6 +151,15 @@ let styleSelected = css`
 
   &:hover {
     color: #111;
+  }
+`;
+
+let notFocus = css`
+  // &:focus:not(:focus-visible) {
+  //   outline: 0;
+  // }
+  &:focus {
+    outline: none;
   }
 `;
 
