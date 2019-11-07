@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect, useRef } from "react";
 import { css, cx } from "emotion";
 import { expand, column, fullHeight, center } from "@jimengio/shared-utils";
-import KEY_CODES from "./utils/key-code";
+import { KEY_CODES } from "./utils/key-code";
 
 export interface ISidebarEntry {
   title: string;
@@ -28,7 +28,6 @@ let DocSidebar: FC<{
   emptyLocale?: string;
 }> = (props) => {
   let [query, setQuery] = useState("");
-  let [selectedIndex, setSeletedIndex] = useState(undefined);
 
   let visibleItems = props.items.filter((item) => {
     return found(item.title, query) || found(item.path, query) || found(item.cnTitle, query);
@@ -52,11 +51,15 @@ let DocSidebar: FC<{
     switch (event.keyCode) {
       case KEY_CODES.DOWN:
         if (currentIndex === visibleItems.length - 1 || currentIndex === -1) return;
-        await setSeletedIndex(++currentIndex);
+        let downChangeIndex = ++currentIndex;
+        if (!visibleItems[downChangeIndex]) return;
+        props.onSwitch(visibleItems[downChangeIndex]);
         return;
       case KEY_CODES.UP:
         if (currentIndex === 0 || currentIndex === -1) return;
-        await setSeletedIndex(--currentIndex);
+        let upChangeIndex = --currentIndex;
+        if (!visibleItems[upChangeIndex]) return;
+        props.onSwitch(visibleItems[upChangeIndex]);
         return;
       default:
         return;
@@ -64,10 +67,7 @@ let DocSidebar: FC<{
   };
 
   /** Effects */
-  useEffect(() => {
-    if (!visibleItems[selectedIndex]) return;
-    props.onSwitch(visibleItems[selectedIndex]);
-  }, [selectedIndex]);
+
   /** Renderers */
 
   return (
@@ -90,7 +90,7 @@ let DocSidebar: FC<{
           return (
             <div
               key={item.path}
-              className={cx(styleItem, isSelected ? cx(styleSelected, notFocus) : notFocus)}
+              className={cx(styleItem, isSelected ? cx(styleSelected, styleFocusWithoutOutline) : styleFocusWithoutOutline)}
               onClick={() => {
                 props.onSwitch(item);
               }}
@@ -154,10 +154,7 @@ let styleSelected = css`
   }
 `;
 
-let notFocus = css`
-  // &:focus:not(:focus-visible) {
-  //   outline: 0;
-  // }
+let styleFocusWithoutOutline = css`
   &:focus {
     outline: none;
   }
