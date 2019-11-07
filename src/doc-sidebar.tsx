@@ -1,6 +1,7 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect, useRef } from "react";
 import { css, cx } from "emotion";
 import { expand, column, fullHeight, center } from "@jimengio/shared-utils";
+import { KEY_CODES } from "./utils/key-code";
 
 export interface ISidebarEntry {
   title: string;
@@ -40,10 +41,33 @@ let DocSidebar: FC<{
       if (selectedItem != null) {
         props.onSwitch(selectedItem);
       }
+    } else {
+      onSwitchItem(event);
+    }
+  };
+
+  let onSwitchItem = async (event) => {
+    let currentIndex = visibleItems.map((element) => element.path).indexOf(props.currentPath);
+    switch (event.keyCode) {
+      case KEY_CODES.DOWN:
+        if (currentIndex === visibleItems.length - 1 || currentIndex === -1) return;
+        let downChangeIndex = ++currentIndex;
+        if (!visibleItems[downChangeIndex]) return;
+        props.onSwitch(visibleItems[downChangeIndex]);
+        return;
+      case KEY_CODES.UP:
+        if (currentIndex === 0 || currentIndex === -1) return;
+        let upChangeIndex = --currentIndex;
+        if (!visibleItems[upChangeIndex]) return;
+        props.onSwitch(visibleItems[upChangeIndex]);
+        return;
+      default:
+        return;
     }
   };
 
   /** Effects */
+
   /** Renderers */
 
   return (
@@ -60,16 +84,18 @@ let DocSidebar: FC<{
       </div>
       <div className={expand}>
         {visibleItems.length === 0 ? <div className={cx(center, styleEmpty)}>{props.emptyLocale || "No results"}</div> : null}
-        {visibleItems.map((item) => {
+        {visibleItems.map((item, index) => {
           let isSelected = props.currentPath === item.path;
 
           return (
             <div
               key={item.path}
-              className={cx(styleItem, isSelected ? styleSelected : null)}
+              className={cx(styleItem, isSelected ? cx(styleSelected, styleFocusWithoutOutline) : styleFocusWithoutOutline)}
               onClick={() => {
                 props.onSwitch(item);
               }}
+              tabIndex={0}
+              onKeyDown={onSwitchItem}
             >
               <div>{item.title}</div>
               <div className={cx(styleSubTitle)}>{item.cnTitle}</div>
@@ -125,6 +151,12 @@ let styleSelected = css`
 
   &:hover {
     color: #111;
+  }
+`;
+
+let styleFocusWithoutOutline = css`
+  &:focus {
+    outline: none;
   }
 `;
 
