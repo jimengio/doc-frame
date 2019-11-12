@@ -2,13 +2,16 @@ import React, { FC, CSSProperties } from "react";
 import { css, cx } from "emotion";
 import hljs from "highlight.js";
 import { Remarkable } from "remarkable";
+import { linkify } from "remarkable/linkify";
+
 import "highlight.js/styles/github.css";
 
 var md = new Remarkable({
   highlight: (code: string, lang: string) => {
     return hljs.highlightAuto(code).value;
   },
-});
+  linkTarget: "_blank",
+}).use(linkify);
 
 let DocBlock: FC<{
   content?: string;
