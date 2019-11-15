@@ -19,9 +19,7 @@ let DocSnippet: FC<{ code: string; lang?: string; className?: string; snippetCla
   return (
     <div className={props.className}>
       <pre className={cx(styleSnippet, props.snippetClassName)}>
-        <code className={styleCode} dangerouslySetInnerHTML={{ __html: html }}>
-          {}
-        </code>
+        <code className={styleCode} dangerouslySetInnerHTML={{ __html: html }} />
       </pre>
     </div>
   );
@@ -36,6 +34,8 @@ let styleSnippet = css`
   background-color: hsl(0, 0%, 98%);
   border-radius: 2px;
   padding: 16px;
+  overflow: auto;
+  max-width: 100%;
 
   min-width: 400px;
 `;

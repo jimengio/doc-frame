@@ -36,7 +36,7 @@ let styleDoc = css`
   padding: 16px;
   margin: 8px;
   border: 1px solid hsl(0, 0%, 95%);
-  max-width: 720px;
+  max-width: 800px;
 
   pre {
     padding: 8px;
