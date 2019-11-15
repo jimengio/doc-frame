@@ -4,7 +4,7 @@ import { rowMiddle, rowParted } from "@jimengio/shared-utils";
 
 let DocDemo: FC<{
   title: string;
-  link: string;
+  link?: string;
   className?: string;
   style?: CSSProperties;
 }> = React.memo((props) => {
@@ -20,8 +20,8 @@ let DocDemo: FC<{
       <div className={cx(rowParted, styleHeader)}>
         <span className={styleTitle}>{props.title}</span>
         {props.title ? (
-          <a className={styleLink} href={props.link} target="_blank">
-            Source Code
+          <a className={cx(styleLink, props.link == null ? styleEmpty : null)} href={props.link} target="_blank">
+            {props.link != null ? "Source Code" : "No link"}
           </a>
         ) : null}
       </div>
@@ -34,7 +34,7 @@ export default DocDemo;
 
 let styleContainer = css`
   margin: 24px 16px;
-  max-width: 720px;
+  max-width: 800px;
   border-radius: 4px;
 
   border: 1px solid hsl(0, 0%, 90%);
@@ -62,4 +62,8 @@ let styleTitle = css`
 
 let styleLink = css`
   font-size: 12px;
+`;
+
+let styleEmpty = css`
+  color: hsl(0, 0%, 80%);
 `;
