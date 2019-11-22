@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import { css, cx } from "emotion";
 import hljs from "highlight.js";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 let DocSnippet: FC<{ code: string; lang?: string; className?: string; snippetClassName?: string }> = React.memo((props) => {
   let [showCopiedStyle, setShowCopiedStyle] = useState<boolean>(false);
@@ -19,14 +20,6 @@ let DocSnippet: FC<{ code: string; lang?: string; className?: string; snippetCla
       return;
     }
     setShowCopiedStyle(true);
-
-    //创建一个隐藏的input来提供复制内容
-    var input = document.createElement("input");
-    document.body.appendChild(input);
-    input.value = html;
-    input.select();
-    document.execCommand("copy");
-    document.body.removeChild(input);
   };
 
   /** Effects */
@@ -44,9 +37,9 @@ let DocSnippet: FC<{ code: string; lang?: string; className?: string; snippetCla
     <div className={props.className}>
       <pre className={cx(styleSnippet, props.snippetClassName)}>
         <div className={cx(styleCopyContainer)}>
-          <button className={cx(showCopiedStyle ? styleCopied : styleCopy)} onClick={onCopyContent}>
-            {showCopiedStyle ? "Copied" : "Copy"}
-          </button>
+          <CopyToClipboard text={html} onCopy={onCopyContent}>
+            <button className={cx(styleButton, showCopiedStyle ? styleCopied : styleCopy)}>{showCopiedStyle ? "Copied" : "Copy"}</button>
+          </CopyToClipboard>
         </div>
         <code className={styleCode} dangerouslySetInnerHTML={{ __html: html }} />
       </pre>
@@ -79,6 +72,7 @@ let styleCopyContainer = css`
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
+  align-items: center;
   height: 30px;
 `;
 
@@ -86,7 +80,6 @@ let styleCopy = css`
   width: 50px;
   height: 18px;
   border: 1px solid hsl(0, 0%, 90%);
-  transition: all 0.3s ease-in-out 0s;
   background: hsl(0, 0%, 98%);
   color: hsl(0, 0%, 40%);
 `;
@@ -95,7 +88,12 @@ let styleCopied = css`
   width: 56px;
   height: 22px;
   border: 1px solid hsl(0, 0%, 90%);
-  transition: all 0.3s ease-in-out 0s;
   background: hsl(0, 0%, 90%);
   color: black;
+`;
+
+let styleButton = css`
+  transition: all 0.3s ease-in-out 0s;
+  line-height: 1;
+  outline: none;
 `;
