@@ -69,31 +69,33 @@ let styleCode = css`
 `;
 
 let styleCopyContainer = css`
-  width: 100%;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
   height: 30px;
+  position: sticky;
+  left: 0px;
+  top: 0px;
 `;
 
 let styleCopy = css`
-  width: 50px;
-  height: 18px;
   border: 1px solid hsl(0, 0%, 90%);
   background: hsl(0, 0%, 98%);
   color: hsl(0, 0%, 40%);
+  cursor: pointer;
 `;
 
 let styleCopied = css`
-  width: 56px;
-  height: 22px;
   border: 1px solid hsl(0, 0%, 90%);
   background: hsl(0, 0%, 90%);
   color: black;
 `;
 
 let styleButton = css`
+  width: 56px;
+  height: 24px;
+  line-height: 1.5;
+  font-size: 12px;
   transition: all 0.3s ease-in-out 0s;
-  line-height: 1;
   outline: none;
 `;
