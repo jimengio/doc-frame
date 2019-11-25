@@ -14,7 +14,7 @@ var md = new Remarkable({
 }).use(linkify);
 
 let DocBlock: FC<{
-  content?: string;
+  content: string;
   className?: string;
   style?: CSSProperties;
   embed?: boolean;

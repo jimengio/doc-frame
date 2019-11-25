@@ -21,7 +21,7 @@ let DocDemo: FC<{
         <span className={styleTitle}>{props.title}</span>
         {props.title ? (
           <a className={cx(styleLink, props.link == null ? styleEmpty : null)} href={props.link} target="_blank">
-            {props.link != null ? "Source Code" : "No link"}
+            {props.link != null ? "Source file" : "No link"}
           </a>
         ) : null}
       </div>
