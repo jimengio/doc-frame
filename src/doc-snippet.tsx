@@ -37,7 +37,7 @@ let DocSnippet: FC<{ code: string; lang?: string; className?: string; snippetCla
     <div className={props.className}>
       <pre className={cx(styleSnippet, props.snippetClassName)}>
         <div className={cx(styleCopyContainer)}>
-          <CopyToClipboard text={html} onCopy={onCopyContent}>
+          <CopyToClipboard text={code} onCopy={onCopyContent}>
             <button className={cx(styleButton, showCopiedStyle ? styleCopied : styleCopy)}>{showCopiedStyle ? "Copied" : "Copy"}</button>
           </CopyToClipboard>
         </div>
