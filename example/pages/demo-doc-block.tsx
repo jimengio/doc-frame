@@ -2,13 +2,7 @@ import React, { FC } from "react";
 import { css } from "emotion";
 import DocBlock from "../../src/doc-block";
 
-let DemoDocBlock: FC<{}> = React.memo((props) => {
-  /** Methods */
-  /** Effects */
-  /** Renderers */
-  return (
-    <div>
-      <DocBlock>{`
+let content = `
 this is a post
 
 \`\`\`ts
@@ -20,7 +14,15 @@ return <div></div>
 
 http://fe.jimu.io
 
-`}</DocBlock>
+`;
+
+let DemoDocBlock: FC<{}> = React.memo((props) => {
+  /** Methods */
+  /** Effects */
+  /** Renderers */
+  return (
+    <div>
+      <DocBlock content={content}></DocBlock>
 
       <DocBlock content="sdsdfsdf" embed></DocBlock>
     </div>
