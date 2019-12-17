@@ -2,6 +2,7 @@ import React, { FC, useState, useEffect } from "react";
 import { css, cx } from "emotion";
 import hljs from "highlight.js";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { center } from "@jimengio/flex-styles";
 
 let DocSnippet: FC<{ code: string; lang?: string; className?: string; snippetClassName?: string }> = React.memo((props) => {
   let [showCopiedStyle, setShowCopiedStyle] = useState<boolean>(false);
@@ -28,7 +29,7 @@ let DocSnippet: FC<{ code: string; lang?: string; className?: string; snippetCla
       let copyInterval = setInterval(() => {
         setShowCopiedStyle(false);
         clearInterval(copyInterval);
-      }, 500);
+      }, 800);
     }
   }, [showCopiedStyle]);
 
@@ -36,12 +37,13 @@ let DocSnippet: FC<{ code: string; lang?: string; className?: string; snippetCla
   return (
     <div className={props.className}>
       <pre className={cx(styleSnippet, props.snippetClassName)}>
-        <div className={cx(styleCopyContainer)}>
-          <CopyToClipboard text={code} onCopy={onCopyContent}>
-            <button className={cx(styleButton, showCopiedStyle ? styleCopied : styleCopy)}>{showCopiedStyle ? "Copied" : "Copy"}</button>
-          </CopyToClipboard>
-        </div>
         <code className={styleCode} dangerouslySetInnerHTML={{ __html: html }} />
+
+        <CopyToClipboard text={code} onCopy={onCopyContent}>
+          <button className={cx("copy-button", center, styleCopyButton, showCopiedStyle ? styleCopied : styleCopy)}>
+            {showCopiedStyle ? "Copied" : "Copy"}
+          </button>
+        </CopyToClipboard>
       </pre>
     </div>
   );
@@ -50,6 +52,7 @@ let DocSnippet: FC<{ code: string; lang?: string; className?: string; snippetCla
 export default DocSnippet;
 
 let styleSnippet = css`
+  position: relative;
   margin: 16px 0;
   display: inline-block;
   border: 1px solid hsl(0, 0%, 94%);
@@ -60,6 +63,14 @@ let styleSnippet = css`
   max-width: 100%;
 
   min-width: 400px;
+
+  .copy-button {
+    opacity: 0.2;
+  }
+
+  :hover .copy-button {
+    opacity: 1;
+  }
 `;
 
 let styleCode = css`
@@ -68,34 +79,29 @@ let styleCode = css`
   line-height: 20px;
 `;
 
-let styleCopyContainer = css`
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  height: 30px;
-  position: sticky;
-  left: 0px;
-  top: 0px;
-`;
-
 let styleCopy = css`
   border: 1px solid hsl(0, 0%, 90%);
-  background: hsl(0, 0%, 98%);
+  background: hsl(0, 0%, 100%);
   color: hsl(0, 0%, 40%);
   cursor: pointer;
 `;
 
-let styleCopied = css`
-  border: 1px solid hsl(0, 0%, 90%);
-  background: hsl(0, 0%, 90%);
-  color: black;
-`;
+let styleCopied = css``;
 
-let styleButton = css`
-  width: 56px;
-  height: 24px;
-  line-height: 1.5;
+let styleCopyButton = css`
+  font-family: Helvetica Neue, Arial, sans-serif;
+  font-weight: 300;
+  width: 60px;
+  height: 26px;
   font-size: 12px;
-  transition: all 0.3s ease-in-out 0s;
+  transition: all 0.14s ease-in-out 0s;
+  border-radius: 4px;
   outline: none;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+
+  :hover {
+    border: 1px solid hsl(0, 0%, 80%);
+  }
 `;
