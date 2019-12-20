@@ -1,10 +1,37 @@
 import React, { FC, CSSProperties } from "react";
 import { css, cx } from "emotion";
-import hljs from "highlight.js";
+import hljs from "highlight.js/lib/highlight";
 import { Remarkable } from "remarkable";
 import { linkify } from "remarkable/linkify";
 
 import "highlight.js/styles/github.css";
+
+import typescriptLang from "highlight.js/lib/languages/typescript";
+hljs.registerLanguage("typescript", typescriptLang);
+
+import javascriptLang from "highlight.js/lib/languages/javascript";
+hljs.registerLanguage("javascript", javascriptLang);
+
+import jsonLang from "highlight.js/lib/languages/json";
+hljs.registerLanguage("json", jsonLang);
+
+import xmlLang from "highlight.js/lib/languages/xml";
+hljs.registerLanguage("xml", xmlLang);
+
+import cssLang from "highlight.js/lib/languages/css";
+hljs.registerLanguage("css", cssLang);
+
+import bashLang from "highlight.js/lib/languages/bash";
+hljs.registerLanguage("bash", bashLang);
+
+import coffeescriptLang from "highlight.js/lib/languages/coffeescript";
+hljs.registerLanguage("coffeescript", coffeescriptLang);
+
+import clojureLang from "highlight.js/lib/languages/clojure";
+hljs.registerLanguage("clojure", clojureLang);
+
+import diffLang from "highlight.js/lib/languages/diff";
+hljs.registerLanguage("diff", diffLang);
 
 var md = new Remarkable({
   highlight: (code: string, lang: string) => {
