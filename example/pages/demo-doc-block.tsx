@@ -3,13 +3,12 @@ import { css } from "emotion";
 import DocBlock from "../../src/doc-block";
 
 let content = `
-this is a post
+this is a post \`console.log("very good")\`
 
 \`\`\`ts
 demo
 
 return <div></div>
-
 \`\`\`
 
 http://fe.jimu.io
