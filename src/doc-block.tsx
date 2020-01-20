@@ -71,6 +71,22 @@ let styleDoc = css`
     border: 1px solid hsl(0, 0%, 95%);
     border-radius: 4px;
   }
+
+  code {
+    font-family: Source Code Pro, menlo, "Courier New", Courier, monospace;
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  p code {
+    background-color: hsl(0, 0%, 97%);
+    padding: 0 4px;
+    margin: 0 4px;
+    line-height: 24px;
+    display: inline-block;
+    border: 1px solid hsl(0, 0%, 95%);
+    border-radius: 4px;
+  }
 `;
 
 let styleEmbed = css`
