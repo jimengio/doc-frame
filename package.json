@@ -1,6 +1,6 @@
 {
   "name": "@jimengio/doc-frame",
-  "version": "0.1.11",
+  "version": "0.1.12-a1",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
@@ -10,7 +10,6 @@
     "dll-release": "time webpack --config webpack/dll-release.js",
     "release": "rm -rfv dist/* && yarn dll-release && time webpack --config webpack/release.js",
     "build": "yarn release",
-    "serve": "http-server dist/ -s",
     "compile": "rm -rfv lib/* && tsc -d --project tsconfig-compile.json --outDir lib/",
     "upload": "rsync -avr --progress dist/ fe.jimu.io:~/repo/jimengio/doc-frame",
     "gen-router": "ts-node -P tsconfig-node.json -r tsconfig-paths/register example/gen-router.ts",
@@ -24,7 +23,6 @@
     "@jimengio/flex-styles": "^0.1.6",
     "@jimengio/router-code-generator": "^0.2.5",
     "@jimengio/ruled-router": "^0.2.23",
-    "@jimengio/shared-utils": "^0.1.5",
     "@types/node": "^13.1.8",
     "@types/prettier": "^1.19.0",
     "@types/query-string": "^6.3.0",
@@ -40,7 +38,6 @@
     "fork-ts-checker-webpack-plugin": "^4.0.1",
     "html-webpack-plugin": "^3.2.0",
     "html-webpack-tags-plugin": "^2.0.17",
-    "http-server": "^0.12.1",
     "immer": "^5.3.2",
     "prettier": "^1.19.1",
     "query-string": "^6.10.1",
