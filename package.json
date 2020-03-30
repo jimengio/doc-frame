@@ -1,6 +1,6 @@
 {
   "name": "@jimengio/doc-frame",
-  "version": "0.1.11",
+  "version": "0.1.12-a1",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
@@ -24,7 +24,6 @@
     "@jimengio/flex-styles": "^0.1.6",
     "@jimengio/router-code-generator": "^0.2.5",
     "@jimengio/ruled-router": "^0.2.23",
-    "@jimengio/shared-utils": "^0.1.5",
     "@types/node": "^13.1.8",
     "@types/prettier": "^1.19.0",
     "@types/query-string": "^6.3.0",

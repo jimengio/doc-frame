@@ -6,7 +6,7 @@ import { css, cx } from "emotion";
 import Home from "./home";
 import { HashRedirect } from "@jimengio/ruled-router/lib/dom";
 import { genRouter, GenRouterTypeMain } from "controller/generated-router";
-import { row, fullscreen, expand } from "@jimengio/shared-utils";
+import { row, fullscreen, expand } from "@jimengio/flex-styles";
 import DocSidebar, { ISidebarEntry } from "../../src/doc-sidebar";
 import DemoDocBlock from "./demo-doc-block";
 import DemoDocDemo from "./demo-doc-demo";

@@ -1,6 +1,6 @@
 import React, { FC, CSSProperties } from "react";
 import { css, cx } from "emotion";
-import { rowMiddle, rowParted } from "@jimengio/shared-utils";
+import { rowMiddle, rowParted } from "@jimengio/flex-styles";
 
 let DocDemo: FC<{
   title: string;
