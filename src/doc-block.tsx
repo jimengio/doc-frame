@@ -1,6 +1,6 @@
 import React, { FC, CSSProperties } from "react";
 import { css, cx } from "emotion";
-import hljs from "highlight.js/lib/highlight";
+import hljs from "highlight.js/lib/core";
 import { Remarkable } from "remarkable";
 import { linkify } from "remarkable/linkify";
 

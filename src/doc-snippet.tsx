@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import { css, cx } from "emotion";
-import hljs from "highlight.js/lib/highlight";
+import hljs from "highlight.js/lib/core";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { center } from "@jimengio/flex-styles";
 
